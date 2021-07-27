@@ -1,0 +1,69 @@
+@import "./variables";
+@import "./libs/normalize";
+
+.app {
+  font-family: "Heebo", sans-serif;
+  color: $textDark;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+input,
+textarea {
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  height: 100vh;
+}
+.header,
+.footer {
+  flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+}
+.content {
+  flex: 1 0 auto;
+}
+.header {
+  background-color: $header;
+  &__inner {
+    max-width: 1118px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 76px;
+  }
+  &-buttons {
+    margin-left: 42px;
+  }
+  &-icons {
+    cursor: pointer;
+    svg:last-child {
+      margin-left: 25px;
+    }
+  }
+  &-auth {
+    & button {
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 18px;
+      padding: 0 16px;
+      color: white;
+    }
+    button:first-child {
+      border-right: 2px solid $orange;
+    }
+  }
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer {
+  background-color: $footer;
+  min-height: 76px;
+  font-size: 14px;
+  line-height: 26px;
+}

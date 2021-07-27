@@ -1,0 +1,16 @@
+$bg: #f8f8f8;
+$footer: #f1f1f3;
+$header: #101010;
+$orange: #fd7114;
+$blue: #148dfd;
+$error: #f44336;
+$other: #afdbbe;
+$textDark: #373738;
+$textGrey: #707070;
+$textLight: #e0e0e0;
+
+@mixin popup {
+  background: #ffffff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}

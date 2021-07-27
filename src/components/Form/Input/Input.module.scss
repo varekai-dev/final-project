@@ -1,0 +1,41 @@
+@import "../../../styles/variables";
+
+*,
+*:focus {
+  outline: none;
+}
+
+.formItem {
+  position: relative;
+  width: 100%;
+}
+.formItem input {
+  width: 100%;
+  display: block;
+  height: 40px;
+  background: transparent;
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  padding: 0 12px;
+}
+.formItem input:focus {
+  border: 2px solid #707070;
+}
+.formItem label {
+  position: absolute;
+  cursor: text;
+  z-index: 2;
+  top: 13px;
+  left: 12px;
+  font-size: 12px;
+  background: #fff;
+  padding: 0 10px;
+  color: $textDark;
+  transition: all 0.3s ease;
+}
+.formItem input:focus + label {
+  font-size: 11px;
+  top: -5px;
+  color: $textDark;
+}
