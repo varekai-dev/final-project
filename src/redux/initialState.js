@@ -1,3 +1,4 @@
 export const initialState = {
-  activePopup: "",
+	activePopup: '',
+	user: null
 };
