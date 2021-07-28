@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setActivePopup } from "../../redux";
+import { setActivePopup } from "../../redux/slices/popupSlice";
 
 import s from "./Popup.module.scss";
 

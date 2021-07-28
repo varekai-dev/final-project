@@ -4,17 +4,27 @@ import { LikeIcon, CartIcon, ChevronIcon, LogoIcon } from "../icons";
 import RegisterForm from "../Form/RegisterForm";
 import LoginForm from "../Form/LoginForm";
 import { useDispatch, useSelector } from "react-redux";
-import { popupSelector, setActivePopup } from "../../redux";
+import { setUser } from "../../redux/slices/userSlice";
+import { setActivePopup } from "../../redux/slices/popupSlice";
+import { selectPopup, selectUserData } from "../../redux/selectors";
 
 const Header = () => {
-  const { activePopup } = useSelector(popupSelector);
-  const dispatch = useDispatch();
-
   const [isMenuActive, setMenuActive] = React.useState(false);
-
-  const user = true;
-  const handleLogin = () => {
-    setMenuActive((prev) => !prev);
+  const dispatch = useDispatch();
+  const activePopup = useSelector(selectPopup);
+  const user = useSelector(selectUserData);
+  const username = user ? user.account.fullName : false;
+  const firstLettersUpperCase = (username) => {
+    if (!username) {
+      return;
+    }
+    const userNameFirstLetters = username
+      .split(" ")
+      .map((word) => word[0].toUpperCase());
+    return userNameFirstLetters.join("");
+  };
+  const handleLogout = () => {
+    dispatch(setUser(""));
   };
   return (
     <header className="header">
@@ -30,6 +40,36 @@ const Header = () => {
         <div className="header-buttons d-flex justify-between align-center">
           <div className="header-auth d-flex align-center">
             {user ? (
+              <div
+                className="header-user__wrapper d-flex align-center"
+                onClick={() => setMenuActive(!isMenuActive)}
+              >
+                <div>Welcome {username}!</div>
+                <div className="header-user d-flex align-center ">
+                  <div className="header-user__logo d-flex align-center justify-center">
+                    {firstLettersUpperCase(username)}
+                  </div>
+                  <ChevronIcon fill="#fff" />
+                  {isMenuActive && (
+                    <div>
+                      <div>
+                        <p>
+                          <b>{username}</b>
+                        </p>
+                        <p>user.account.email</p>
+                      </div>
+                      <div>
+                        <Link to="/account/settings">
+                          <a href="/account/settings">Settings</a>
+                        </Link>
+
+                        <button onClick={handleLogout}>Log out</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
               <>
                 <button onClick={() => dispatch(setActivePopup("register"))}>
                   REGISTER
@@ -39,31 +79,6 @@ const Header = () => {
                   LOG IN
                 </button>
                 {activePopup === "login" && <LoginForm />}
-              </>
-            ) : (
-              <>
-                <div>Welcome Tony!</div>
-                <div className="header-user">
-                  <div className="header-user__logo">TS</div>
-                  <ChevronIcon />
-                  {isMenuActive && (
-                    <div>
-                      <div>
-                        <p>
-                          <b>Tony Stark</b>
-                        </p>
-                        <p>Tony.Stark@gmail.com</p>
-                      </div>
-                      <div>
-                        <Link to="/account/settings">
-                          <a href="/account/settings">Settings</a>
-                        </Link>
-
-                        <button onClick={handleLogin}>Log out</button>
-                      </div>
-                    </div>
-                  )}
-                </div>
               </>
             )}
           </div>
