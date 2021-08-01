@@ -1,26 +1,50 @@
+@import "../../styles/variables";
 .button {
-	height: 36px;
-	border-radius: 5px;
-	cursor: pointer;
+  height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.buttonTransparent {
+  color: $orange;
+  border: 1px solid $orange;
 }
 
 .buttonOrange {
-	width: 100%;
-	background: #fd7114;
-	color: white;
-	font-size: 16px;
-	line-height: 23px;
-	text-align: center;
-	letter-spacing: 0.4px;
-	transition: all 0.3s;
-	&:hover {
-		opacity: 0.8;
-	}
-	&:active {
-		background: #fd7114;
-	}
-	&:disabled {
-		cursor: not-allowed;
-		background: lighten($color: #fd7114, $amount: 20%);
-	}
+  background: #fd7114;
+  color: white;
+  font-size: 16px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  transition: all 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    background: #fd7114;
+    transform: translateY(2px);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background: lighten($color: #fd7114, $amount: 20%);
+  }
+}
+
+.buttonBlue {
+  background: $blue;
+  transition: all 0.3s;
+  color: #fff;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    background: $blue;
+    transform: translateY(2px);
+  }
 }

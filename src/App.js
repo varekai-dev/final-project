@@ -10,7 +10,6 @@ function App() {
       <Layout>
         <div className="content">
           <div className="container">
-            content
             <Route exact path="/" component={HomeScreen} />
           </div>
         </div>
