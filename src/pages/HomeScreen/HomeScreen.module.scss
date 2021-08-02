@@ -1,7 +1,33 @@
+@import '../../styles/variables';
+
 .homeScreen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0 83px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 20px 0 83px;
+	height: 100%;
+}
+
+.noResultBySearch {
+	max-width: 347px;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	h2 {
+		font-size: 18px;
+		line-height: 26px;
+		text-align: center;
+		letter-spacing: 0.5px;
+		color: $header;
+		margin-bottom: 10px;
+	}
+	p {
+		font-size: 15px;
+		line-height: 22px;
+		color: $textDark;
+	}
 }
