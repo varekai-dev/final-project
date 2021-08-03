@@ -1,4 +1,5 @@
 import React from "react";
+import reactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import { setActivePopup } from "../../redux/slices/popupSlice";
 
@@ -12,10 +13,11 @@ const Popup = ({ children }) => {
     }
     dispatch(setActivePopup(""));
   };
-  return (
+  return reactDOM.createPortal(
     <div className={s.overlay} onClick={closeModalWindow}>
       <div className={`${s.popup} popup`}>{children}</div>
-    </div>
+    </div>,
+    document.getElementById("modal")
   );
 };
 

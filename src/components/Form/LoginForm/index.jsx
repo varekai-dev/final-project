@@ -1,5 +1,4 @@
 import React from "react";
-import reactDOM from "react-dom";
 import Input from "../Input";
 import PasswordInput from "../PasswordInput";
 import Button from "../../Button";
@@ -33,7 +32,7 @@ const LoginForm = () => {
     dispatch(resetError());
   }, [dispatch]);
 
-  return reactDOM.createPortal(
+  return (
     <Popup>
       <i className="close-btn" onClick={() => dispatch(setActivePopup(""))}>
         <CloseIcon width="18" height="18" />
@@ -65,9 +64,7 @@ const LoginForm = () => {
           Register now
         </span>
       </div>
-    </Popup>,
-
-    document.getElementById("modal")
+    </Popup>
   );
 };
 
