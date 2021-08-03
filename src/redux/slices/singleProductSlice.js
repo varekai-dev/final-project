@@ -2,15 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { resetLoading, setLoading } from './statusSlice';
 
-export const fetchSingleProduct = createAsyncThunk('products/fetchSingleProduct', async (itemsNumber, { rejectWithValue, getState, dispatch }) => {
+export const fetchSingleProduct = createAsyncThunk('products/fetchSingleProduct', async (id, { rejectWithValue, getState, dispatch }) => {
 	try {
 		dispatch(setLoading());
-		const response = await axios(`/api/products?offset=${itemsNumber}&limit=12`);
-		const data = response.data;
-		const oldProductsList = getState().products.productsList;
-		console.log(oldProductsList);
-		const newProductsList = [...oldProductsList, ...data];
-		return newProductsList;
+		const response = await axios(`/api/products/${id}`);
+		dispatch(setProduct(response.data));
 	} catch (error) {
 		return rejectWithValue(error.response.data.error);
 	} finally {

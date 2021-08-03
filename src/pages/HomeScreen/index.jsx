@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FilterBlock from '../../components/FilterBlock';
 import LoadMore from '../../components/LoadMore';
 import ProductsList from '../../components/ProductsList/ProductsList';
+import { setActivePopup } from '../../redux/slices/popupSlice';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 
 import s from './HomeScreen.module.scss';
@@ -13,9 +14,13 @@ const HomeScreen = () => {
 	const isProductsExistBySearch = searchValue.length > 0 && products.length === 0;
 	const dispatch = useDispatch();
 
-	const showLoadMore = products.length > 0 && products.length === 12;
+	const showLoadMore = products.length > 0 && products.length % 12 === 0;
 	React.useEffect(() => {
-		dispatch(fetchProducts());
+		if (products.length === 0) {
+			dispatch(fetchProducts());
+		}
+
+		dispatch(setActivePopup(''));
 	}, [dispatch]);
 
 	return (

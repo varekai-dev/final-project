@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { HomeScreen } from './pages';
 import 'macro-css';
 import './styles/app.scss';
+import ProductScreen from './pages/ProductScreen';
 
 function App() {
 	return (
@@ -10,7 +11,8 @@ function App() {
 			<Layout>
 				<div className="content">
 					<div className="container">
-						<Route path="/" component={HomeScreen} />
+						<Route exact path="/" component={HomeScreen} />
+						<Route exact path="/product/:id" component={ProductScreen} />
 					</div>
 				</div>
 			</Layout>

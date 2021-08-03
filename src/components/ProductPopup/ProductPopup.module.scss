@@ -1,2 +1,129 @@
+@import '../../styles/variables';
+
 .product {
+	background: #ffffff;
+	padding: 141px 135px 127px 86px;
+	width: 1000px;
+}
+.productWrapper {
+	max-width: 782px;
+	width: 100%;
+}
+.content {
+	display: flex;
+	margin-bottom: 70px;
+	align-items: flex-start;
+}
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	button {
+		width: 220px;
+	}
+	button:nth-child(2) {
+		margin-left: 35px;
+	}
+	button:last-child {
+		margin-left: auto;
+	}
+}
+
+.image {
+	background: #ffffff;
+	border: 1px solid #e4e4e4;
+	box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
+	border-radius: 4px;
+	padding: 11px;
+	margin-right: 42px;
+	img {
+		width: 400px;
+	}
+}
+.description {
+	max-width: 300px;
+	h2 {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 26px;
+		margin-bottom: 10px;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		display: -webkit-box;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: normal;
+	}
+	p {
+		font-size: 15px;
+		line-height: 22px;
+		color: $textGrey;
+		margin-bottom: 31px;
+	}
+}
+.price {
+	display: flex;
+	width: 100%;
+	margin-bottom: 25px;
+	span:first-child {
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 26px;
+		width: 170px;
+	}
+	span:last-child {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 26px;
+	}
+}
+.counter {
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+	line-height: 22px;
+	margin-bottom: 50px;
+}
+
+.counterButton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 26px;
+	height: 26px;
+	color: $textGrey;
+	background: #e0e0e0;
+	border-radius: 50%;
+	cursor: pointer;
+	user-select: none;
+	&:hover {
+		background: darken($color: #e0e0e0, $amount: 1);
+	}
+	&:active {
+		background: darken($color: #e0e0e0, $amount: 1);
+		transform: translateY(1px);
+	}
+}
+.count {
+	color: black;
+	margin: 0 10px;
+}
+
+.items {
+	margin-bottom: 5px;
+	span:first-child {
+		font-size: 15px;
+		line-height: 22px;
+		color: $textGrey;
+		margin-right: 32px;
+	}
+	span:last-child {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 26px;
+	}
+}
+
+.favorite {
+	background: $orange;
+	color: white;
 }
