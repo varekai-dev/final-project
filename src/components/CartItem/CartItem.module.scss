@@ -1,0 +1,76 @@
+@import '../../styles/variables';
+
+.orderItem {
+	background: #ffffff;
+	border: 1px solid #eceef0;
+	box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
+	border-radius: 4px;
+	padding: 18px;
+	display: flex;
+	justify-content: space-between;
+	img {
+		object-fit: contain;
+		width: 125px;
+		height: 125px;
+		margin-right: 20px;
+	}
+}
+.orderContent {
+	border-right: 1px solid #eceef0;
+	padding-right: 10px;
+	flex: 1;
+
+	h2 {
+		font-size: 14px;
+		line-height: 26px;
+		text-transform: uppercase;
+		color: $header;
+		font-weight: normal;
+		margin-top: 7px;
+		margin-bottom: 28px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		display: -webkit-box;
+	}
+}
+
+.buttons {
+	display: flex;
+}
+.basket {
+	display: flex;
+	margin-right: 20px;
+	cursor: pointer;
+	align-items: stretch;
+	svg {
+		transition: all 0.2s;
+	}
+	&:hover {
+		svg {
+			fill: #818183;
+		}
+	}
+	&:active {
+		transform: translateY(2px);
+	}
+}
+.priceBlock {
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	line-height: 22px;
+	div {
+		margin-bottom: 7px;
+	}
+}
+.price {
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 26px;
+	letter-spacing: 0.5px;
+}

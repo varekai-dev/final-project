@@ -4,12 +4,22 @@ import { setProducts } from './productsSlice';
 import { resetLoading, setLoading } from './statusSlice';
 
 export const addProductToFavorite = createAsyncThunk('products/addProductToFavorite', async (id, { rejectWithValue, dispatch, getState }) => {
+	const singleProduct = getState().singleProduct.product;
+
 	try {
 		dispatch(setLoading());
 		const response = await axios.post(`/api/products/${id}/favorite`);
 		const oldProductsList = getState().products.productsList;
 		const toogleFavoriteProduct = oldProductsList.find((favorite) => favorite.id === id);
 		const newProducts = oldProductsList.map((product) => (product.id === toogleFavoriteProduct.id ? { ...product, favorite: true } : product));
+		if (singleProduct.id === id) {
+			const updatedProduct = {
+				...singleProduct,
+				favorite: true
+			};
+			dispatch(setProducts(updatedProduct));
+		}
+
 		dispatch(setProducts(newProducts));
 		return response.data;
 	} catch (error) {

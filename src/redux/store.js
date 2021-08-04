@@ -6,6 +6,7 @@ import productsSlice from './slices/productsSlice';
 import userSlice from './slices/userSlice';
 import statusSlice from './slices/statusSlice';
 import singleProductSlice from './slices/singleProductSlice';
+import ordersSlice from './slices/ordersSlice';
 
 const rootReducer = combineReducers({
 	user: userSlice,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	favorite: favoritesSlice,
 	filter: filterSlice,
 	status: statusSlice,
-	singleProduct: singleProductSlice
+	singleProduct: singleProductSlice,
+	orders: ordersSlice
 });
 
 export const store = configureStore({

@@ -7,11 +7,13 @@ import { readUserInfoFromLocalStorage } from '../../utils/readUserInfoFromLocalS
 import LoginForm from '../Form/LoginForm';
 import RegisterForm from '../Form/RegisterForm';
 import Loader from '../Loader';
+
 import GuestPopup from '../GuestPopup/GuestPopup';
 
 const Layout = ({ children }) => {
 	const activePopup = useSelector((state) => state.popup.activePopup);
 	const loadingStatus = useSelector((state) => state.status.loading);
+
 	const dispatch = useDispatch();
 	const user = readUserInfoFromLocalStorage();
 	React.useEffect(() => {
@@ -20,7 +22,6 @@ const Layout = ({ children }) => {
 			dispatch(setUser(user));
 		}
 	}, [dispatch, user]);
-
 	return (
 		<>
 			<Header />

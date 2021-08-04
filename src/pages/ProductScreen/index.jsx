@@ -1,17 +1,24 @@
-import React from "react";
-import HomeScreen from "../HomeScreen";
-import { useParams } from "react-router-dom";
-import ProductPopup from "../../components/ProductPopup";
+import React from 'react';
+import HomeScreen from '../HomeScreen';
+import { useParams } from 'react-router-dom';
+import ProductPopup from '../../components/ProductPopup';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActivePopup } from '../../redux/slices/popupSlice';
 
 const ProductScreen = () => {
-  let { id } = useParams();
+	const dispatch = useDispatch();
+	let { id } = useParams();
+	const activePopup = useSelector((state) => state.popup.activePopup);
+	React.useEffect(() => {
+		dispatch(setActivePopup('product'));
+	}, [id, dispatch]);
 
-  return (
-    <>
-      <HomeScreen />
-      <ProductPopup id={id} />
-    </>
-  );
+	return (
+		<>
+			<HomeScreen />
+			{activePopup === 'product' && <ProductPopup id={id} />}
+		</>
+	);
 };
 
 export default ProductScreen;
