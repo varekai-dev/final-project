@@ -179,6 +179,8 @@ textarea {
 	&__menu-list {
 		padding: 0;
 		max-height: 480px;
+		z-index: 3;
+		position: relative;
 	}
 	&__clear-indicator {
 		position: absolute;
@@ -195,7 +197,7 @@ textarea {
 	&__control {
 		position: relative;
 		height: 37px;
-		background-color: #f9fafb !important;
+		background-color: #f9fafb;
 		border: 1px solid #dedee0;
 		box-sizing: border-box;
 		border-radius: 5px;
@@ -239,6 +241,33 @@ textarea {
 
 	&__indicator-separator {
 		display: none;
+	}
+}
+
+.cart-form {
+	.select {
+		margin-bottom: 20px;
+
+		&__control {
+			background-color: #fff;
+			padding: 0 10px;
+		}
+		&__placeholder {
+			position: absolute;
+			cursor: text;
+
+			font-size: 12px;
+			background: #fff;
+			padding: 0 10px;
+			color: $textGrey;
+			transition: all 0.2s ease;
+		}
+		&__option {
+			font-size: 13px;
+		}
+		&__single-value {
+			font-size: 13px;
+		}
 	}
 }
 

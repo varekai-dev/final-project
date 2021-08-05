@@ -3,10 +3,12 @@ import React, { forwardRef } from 'react';
 import NumberFormat from 'react-number-format';
 import s from './Input/Input.module.scss';
 
-const PhoneInput = forwardRef(({ className, type, helperText, error, label, emailError = false, ...rest }, ref) => {
+const PhoneInput = forwardRef(({ className, type, helperText, name, error, label, ...rest }, ref) => {
+	const inputRef = React.createRef();
+	console.log(inputRef);
 	return (
 		<div className={clsx(className, s.formItem, error && s.error)}>
-			<NumberFormat format="+3 (###) ### ## ##" mask=" " type={type} id={label} required="required" ref={ref} {...rest} />
+			<NumberFormat format="+3 (###) ### ## ##" mask=" " type={type} id={label} required="required" ref={ref} name={name} {...rest} />
 			<label htmlFor={label}>{label}</label>
 			{error && <span>{helperText}</span>}
 		</div>

@@ -33,7 +33,7 @@ export const fetchCountries = createAsyncThunk('orders/fetchCountries', async (_
 const orderSlice = createSlice({
 	name: 'orders',
 	initialState: {
-		orders: [],
+		orders: [{ id: 2091, title: 'Underdesk Keyboard Drawer', price: 255, picture: 'http://ecx.images-amazon.com/images/I/41TNAVmfUqL._SY300_.jpg', description: 'Keyboard drawer.', favorite: true, createdAt: '2021-07-19T17:18:16.636Z', updatedAt: '2021-07-19T17:18:16.636Z', quantity: 1 }],
 		error: null,
 		lastOrder: null,
 		countries: [],

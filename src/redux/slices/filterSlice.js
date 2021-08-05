@@ -54,7 +54,7 @@ const setError = (state, action) => {
 const filterSlice = createSlice({
 	name: 'filter',
 	initialState: {
-		sortBy: null,
+		activeSortBy: null,
 		activeCategory: null,
 		categories: [],
 		status: null,
