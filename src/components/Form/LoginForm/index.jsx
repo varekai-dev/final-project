@@ -6,7 +6,7 @@ import Popup from '../../Popup';
 import s from '../Form.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from './LoginShema';
 import { setActivePopup } from '../../../redux/slices/popupSlice';
 import { loginUser, resetError } from '../../../redux/slices/userSlice';
@@ -22,7 +22,11 @@ const LoginForm = () => {
 				.map((word) => word.toLowerCase())
 				.join(' ')
 		: null;
-	const { register, handleSubmit, errors } = useForm({
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm({
 		mode: 'onBlur',
 		resolver: yupResolver(loginSchema)
 	});
@@ -35,13 +39,13 @@ const LoginForm = () => {
 
 	return (
 		<Popup>
-			<i className="close-btn" onClick={() => dispatch(setActivePopup(''))}>
+			<i className="close-btn" onClick={() => dispatch(setActivePopup(null))}>
 				<CloseIcon width="18" height="18" />
 			</i>
 			<form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
 				<h2>Login</h2>
-				<Input label="Email" name="email" ref={register} error={!!errors.email} helperText={errors?.email?.message} />
-				<PasswordInput label="Password" type="password" ref={register} name="password" error={!!errors.password} helperText={errors?.password?.message} />
+				<Input label="Email" {...register('email')} type="text" name="email" error={!!errors.email} helperText={errors?.email?.message} />
+				<PasswordInput label="Password" type="password" {...register('password')} error={!!errors.password} helperText={errors?.password?.message} />
 				<Button color="orange">Login</Button>
 				{normalizeError && <span>{normalizeError}</span>}
 			</form>

@@ -1,39 +1,45 @@
-import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../redux/slices/userSlice";
-import { readUserInfoFromLocalStorage } from "../../utils/readUserInfoFromLocalStorage";
-import LoginForm from "../Form/LoginForm";
-import RegisterForm from "../Form/RegisterForm";
-import Loader from "../Loader";
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../redux/slices/userSlice';
+import { readUserInfoFromLocalStorage } from '../../utils/readUserInfoFromLocalStorage';
+import LoginForm from '../Form/LoginForm';
+import RegisterForm from '../Form/RegisterForm';
+import Loader from '../Loader';
 
-import GuestPopup from "../GuestPopup/GuestPopup";
+import GuestPopup from '../GuestPopup/GuestPopup';
+import PurchasePopup from '../PurchasePopup';
+import ProductPopup from '../ProductPopup';
 
 const Layout = ({ children }) => {
-  const activePopup = useSelector((state) => state.popup.activePopup);
-  const loadingStatus = useSelector((state) => state.status.loading);
-
-  const dispatch = useDispatch();
-  const user = readUserInfoFromLocalStorage();
-  React.useEffect(() => {
-    if (user) {
-      readUserInfoFromLocalStorage();
-      dispatch(setUser(user));
-    }
-  }, [dispatch, user]);
-  return (
-    <>
-      <Header />
-      {loadingStatus && <Loader />}
-      {activePopup === "guest-popup" && <GuestPopup />}
-      {activePopup === "register" && <RegisterForm />}
-      {activePopup === "login" && <LoginForm />}
-
-      {children}
-      <Footer />
-    </>
-  );
+	const id = useSelector((state) => state.popup.activeProduct);
+	const activePopup = useSelector((state) => state.popup.activePopup);
+	const loadingStatus = useSelector((state) => state.status.loading);
+	const popups = {
+		guestPopup: <GuestPopup />,
+		register: <RegisterForm />,
+		login: <LoginForm />,
+		purchasePopup: <PurchasePopup />,
+		product: <ProductPopup id={id} />
+	};
+	const dispatch = useDispatch();
+	const user = readUserInfoFromLocalStorage();
+	React.useEffect(() => {
+		if (user) {
+			readUserInfoFromLocalStorage();
+			dispatch(setUser(user));
+		}
+	}, [dispatch, user]);
+	return (
+		<>
+			<Header />
+			{loadingStatus && <Loader />}
+			{activePopup && popups[activePopup]}
+			{children}
+			<Footer />
+		</>
+	);
 };
 
 export default Layout;

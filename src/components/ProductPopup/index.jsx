@@ -40,12 +40,12 @@ const ProductPopup = ({ id }) => {
 				dispatch(updateFavorite());
 			}
 		} else {
-			dispatch(setActivePopup('guest-popup'));
+			dispatch(setActivePopup('guestPopup'));
 		}
 	};
 	const addToCart = () => {
 		dispatch(addProductToOrder({ product, count }));
-		dispatch(setActivePopup(''));
+		dispatch(setActivePopup(null));
 		dispatch(addNotification(product.title));
 		history.push('/');
 	};
@@ -59,10 +59,10 @@ const ProductPopup = ({ id }) => {
 	return (
 		<>
 			<Popup>
-				{product && (
+				{product && product.id === id && (
 					<div className={s.product}>
 						<div className={s.productWrapper}>
-							<i className="close-btn" onClick={() => history.push('/')}>
+							<i className="close-btn" onClick={() => dispatch(setActivePopup(null))}>
 								<CloseIcon width="18" height="18" />
 							</i>
 							<div className={s.content}>

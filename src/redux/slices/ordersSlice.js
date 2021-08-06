@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setActivePopup } from './popupSlice';
 import { resetLoading, setLoading } from './statusSlice';
 
 export const fetchOrders = createAsyncThunk('orders/fetchOrders', async (_, { rejectWithValue, dispatch }) => {
@@ -30,10 +31,33 @@ export const fetchCountries = createAsyncThunk('orders/fetchCountries', async (_
 	}
 });
 
+export const makeOrder = createAsyncThunk('orders/makeOrder', async (shipment, { rejectWithValue, dispatch, getState }) => {
+	const orders = getState().orders.orders;
+	const items = orders.map((order) => ({
+		productId: order.id,
+		quantity: order.quantity
+	}));
+	const order = {
+		items,
+		shipment
+	};
+
+	try {
+		const response = await axios.post('/api/orders', order);
+		const data = response.data;
+		console.log(data);
+		dispatch(setActivePopup('purchasePopup'));
+		dispatch(clearOrders());
+		return data;
+	} catch (error) {
+		return rejectWithValue(error.response.data.error);
+	}
+});
+
 const orderSlice = createSlice({
 	name: 'orders',
 	initialState: {
-		orders: [{ id: 2091, title: 'Underdesk Keyboard Drawer', price: 255, picture: 'http://ecx.images-amazon.com/images/I/41TNAVmfUqL._SY300_.jpg', description: 'Keyboard drawer.', favorite: true, createdAt: '2021-07-19T17:18:16.636Z', updatedAt: '2021-07-19T17:18:16.636Z', quantity: 1 }],
+		orders: [],
 		error: null,
 		lastOrder: null,
 		countries: [],
@@ -79,6 +103,9 @@ const orderSlice = createSlice({
 		},
 		addCountries(state, action) {
 			state.countries = action.payload;
+		},
+		clearOrders(state) {
+			state.orders = [];
 		}
 	},
 	extraReducers: {
@@ -91,6 +118,6 @@ const orderSlice = createSlice({
 	}
 });
 
-export const { addProductToOrder, removeProductFromOrder, addNotification, increaseQuantity, decreaseQuantity, addCountries } = orderSlice.actions;
+export const { clearOrders, addProductToOrder, removeProductFromOrder, addNotification, increaseQuantity, decreaseQuantity, addCountries } = orderSlice.actions;
 
 export default orderSlice.reducer;

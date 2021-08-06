@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
-
 import CartList from '../../components/CartList';
 import CartForm from '../../components/Form/CartForm';
 

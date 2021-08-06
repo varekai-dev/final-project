@@ -66,7 +66,7 @@ const filterSlice = createSlice({
 			state.activeCategory = action.payload;
 		},
 		chooseSortBy(state, action) {
-			state.sortBy = action.payload;
+			state.activeSortBy = action.payload;
 		},
 		changeSearchValue(state, action) {
 			state.searchValue = action.payload;

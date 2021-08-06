@@ -9,8 +9,9 @@ export const registerUser = createAsyncThunk('user/register', async (registerDat
 		dispatch(setLoading());
 		const response = await axios.post('/api/auth/register', registerData);
 		const data = response.data;
-		dispatch(setActivePopup(''));
+		dispatch(setActivePopup(null));
 		localStorage.setItem('user', JSON.stringify(data));
+		axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 		dispatch(fetchProducts());
 		return data;
 	} catch (error) {
@@ -26,8 +27,9 @@ export const loginUser = createAsyncThunk('user/login', async (loginData, { reje
 		const response = await axios.post('/api/auth/login', loginData);
 		const data = response.data;
 		localStorage.setItem('user', JSON.stringify(data));
+		axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 		dispatch(fetchProducts());
-		dispatch(setActivePopup(''));
+		dispatch(setActivePopup(null));
 		return data;
 	} catch (error) {
 		return rejectWithValue(error.response.data.error);

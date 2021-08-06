@@ -1,15 +1,28 @@
 @import '../../../styles/variables';
+
+.dropdownWrapper {
+	margin-bottom: 20px;
+	span {
+		margin-top: 10px;
+		font-family: 'Roboto', sans-serif;
+		color: $error;
+		font-size: 12px;
+		line-height: 20px;
+	}
+}
 .dropdown {
 	background-color: white;
 	border: solid 1px #ccc;
 	border-radius: 4px;
 	font-family: 'Roboto', sans-serif;
-	margin-bottom: 20px;
 	position: relative;
+	&.error {
+		border-color: $error;
+	}
 }
 
 .dropdownHeader {
-	padding: 15px;
+	padding: 12px;
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
@@ -28,6 +41,9 @@
 	top: 50%;
 	font-size: 12px;
 	transform: translateY(-50%);
+	&.error {
+		color: $error;
+	}
 }
 .labelActive {
 	font-size: 11px;
@@ -72,4 +88,9 @@
 	top: 50%;
 	transform: translateY(-50%);
 	display: flex;
+	&.error {
+		svg {
+			fill: $error;
+		}
+	}
 }

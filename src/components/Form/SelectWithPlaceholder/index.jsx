@@ -5,7 +5,7 @@ import { ChevronIcon, CloseIcon } from '../../../assets/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCountries } from '../../../redux/slices/ordersSlice';
 
-const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label }, ref) => {
+const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label, setValue }, ref) => {
 	const [isOpen, setOpen] = React.useState(false);
 	const wrapperRef = React.useRef(null);
 	const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label }, re
 	};
 	const handleItemClick = (id) => {
 		selectedItem === id ? setSelectedItem(null) : setSelectedItem(countries[id].label);
+		setValue(name, countries[id].label);
 	};
 
 	const handleClickOutside = (event) => {
@@ -23,7 +24,6 @@ const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label }, re
 			setOpen(false);
 		}
 	};
-
 	React.useEffect(() => {
 		document.addEventListener('click', handleClickOutside, false);
 		return () => {
@@ -36,35 +36,38 @@ const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label }, re
 	const handleClose = (e) => {
 		e.stopPropagation();
 		setSelectedItem('');
+		setValue(name, '');
 	};
 
 	return (
 		<>
-			<div className={s.dropdown}>
-				<div className={s.dropdownHeader} onClick={toggleDropdown} ref={wrapperRef}>
-					<label className={clsx(s.label, selectedItem && s.labelActive)}>{label}</label>
-					<input ref={ref} value={selectedItem} readOnly name={name} />
+			<div className={s.dropdownWrapper}>
+				<div className={clsx(s.dropdown, error && s.error)}>
+					<div className={s.dropdownHeader} onClick={toggleDropdown} ref={wrapperRef}>
+						<label className={clsx(s.label, selectedItem && s.labelActive, error && s.error)}>{label}</label>
+						<input value={selectedItem} name={name} readOnly />
 
-					{!selectedItem ? (
-						<i className={s.icon}>
-							<ChevronIcon />
-						</i>
-					) : (
-						<i onClick={handleClose} className={s.icon}>
-							<CloseIcon width="16" height="16" />
-						</i>
-					)}
+						{!selectedItem ? (
+							<i className={s.icon}>
+								<ChevronIcon fill={error ? '#f44336' : ''} />
+							</i>
+						) : (
+							<i onClick={handleClose} className={clsx(s.icon)}>
+								<CloseIcon width="16" height="16" />
+							</i>
+						)}
+					</div>
+					<div className={clsx(s.dropdownBody, isOpen && s.open)}>
+						{countries &&
+							countries.map((item, index) => (
+								<div id={index} className={s.dropdownItem} onClick={(e) => handleItemClick(e.target.id)} key={item.value}>
+									{item.label}
+								</div>
+							))}
+					</div>
 				</div>
-				<div className={`${s.dropdownBody} ${isOpen && s.open}`}>
-					{countries &&
-						countries.map((item, index) => (
-							<div id={index} className={s.dropdownItem} onClick={(e) => handleItemClick(e.target.id)} key={item.value}>
-								{item.label}
-							</div>
-						))}
-				</div>
+				{error && <span>{helperText}</span>}
 			</div>
-			{error && <span>{helperText}</span>}
 		</>
 	);
 });

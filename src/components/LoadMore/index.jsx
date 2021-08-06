@@ -1,16 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchMoreProducts } from '../../redux/slices/productsSlice';
 import Button from '../Button';
 
 import s from './LoadMore.module.scss';
 
 const LoadMore = () => {
-	const [itemsNumber, setItemsNumber] = React.useState(12);
+	const limit = useSelector((state) => state.products.limit);
+	const [itemsNumber, setItemsNumber] = React.useState(limit);
 	const dispatch = useDispatch();
-
 	const handleLoadMore = () => {
-		setItemsNumber(itemsNumber + 12);
+		setItemsNumber(itemsNumber + limit);
 		dispatch(fetchMoreProducts(itemsNumber));
 	};
 	return (

@@ -5,18 +5,21 @@ import Button from '../../Button';
 import Popup from '../../Popup';
 import { useDispatch, useSelector } from 'react-redux';
 import s from '../Form.module.scss';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { RegisterSchema } from './RegisterSchema';
 import { setActivePopup } from '../../../redux/slices/popupSlice';
 import { registerUser, resetError } from '../../../redux/slices/userSlice';
 import { CloseIcon } from '../../../assets/icons';
-import PhoneInput from '../PhoneInput';
 
 const RegisterForm = () => {
 	const registerError = useSelector((state) => state.user.error);
 	const dispatch = useDispatch();
-	const { register, handleSubmit, errors } = useForm({
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm({
 		mode: 'onBlur',
 		resolver: yupResolver(RegisterSchema)
 	});
@@ -24,21 +27,20 @@ const RegisterForm = () => {
 	const onSubmit = async (data) => {
 		dispatch(registerUser(data));
 	};
-
 	React.useEffect(() => {
 		dispatch(resetError());
 	}, [dispatch]);
 	return (
 		<Popup>
-			<i className="close-btn" onClick={() => dispatch(setActivePopup(''))}>
+			<i className="close-btn" onClick={() => dispatch(setActivePopup(null))}>
 				<CloseIcon width="18" height="18" />
 			</i>
 			<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 				<h2>Register</h2>
-				<Input label="Full Name" ref={register} type="text" name="fullName" error={!!errors.fullName} helperText={errors?.fullName?.message} />
-				<Input label="Email" ref={register} type="text" name="email" error={!!errors.email || registerError} helperText={errors?.email?.message} emailError={registerError} />
-				<PhoneInput label="Phone number" ref={register} type="tel" name="phone" error={!!errors.phone} helperText={errors?.phone?.message} />
-				<PasswordInput label="Password" ref={register} type="password" name="password" error={!!errors.password} helperText={errors?.password?.message} />
+				<Input label="Full Name" {...register('fullName')} type="text" name="fullName" error={!!errors.fullName} helperText={errors?.fullName?.message} />
+				<Input label="Email" {...register('email')} type="text" name="email" error={!!errors.email || registerError} helperText={errors?.email?.message} emailError={registerError} />
+				<Input label="Phone number" {...register('phone')} type="tel" name="phone" error={!!errors.phone} helperText={errors?.phone?.message} />
+				<PasswordInput label="Password" {...register('password')} type="password" name="password" error={!!errors.password} helperText={errors?.password?.message} />
 				<p>The password has to be at least at least 1 letter, 1special symbol, 1 number</p>
 				<Button color="orange">Register</Button>
 			</form>
