@@ -41,16 +41,39 @@ export const fetchProductsBySearch = createAsyncThunk(
   }
 );
 
+export const fetchProductsBySort = createAsyncThunk(
+  "products/fetchProductsBySort",
+  async (_, { rejectWithValue, dispatch, getState }) => {
+    const sortBy = getState().filter.activeSortBy;
+    const limit = getState().products.limit;
+    try {
+      dispatch(setLoading());
+      const response = await axios(
+        `/api/products?offset=0&limit=${limit}&sortBy=${sortBy.value}`
+      );
+      const data = response.data;
+      dispatch(setProducts(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    } finally {
+      dispatch(resetLoading());
+    }
+  }
+);
+
 export const fetchProductsByCategory = createAsyncThunk(
   "filter/fetchProductsByCategory",
   async (_, { rejectWithValue, dispatch, getState }) => {
+    const limit = getState().products.limit;
     const activeCategory = getState().filter.activeCategory.id;
     try {
       dispatch(setLoading());
       const response = await axios(
-        `/api/categories${activeCategory ? `/${activeCategory}/products` : ""}`
+        `/api/categories${
+          activeCategory ? `/${activeCategory}/products?limit=${limit}` : ""
+        }`
       );
-      dispatch(resetSortBy());
       dispatch(setProducts(response.data));
     } catch (error) {
       return rejectWithValue(error.response.data.error);
@@ -60,6 +83,50 @@ export const fetchProductsByCategory = createAsyncThunk(
   }
 );
 
+export const fetchMoreProductsByCategory = createAsyncThunk(
+  "products/fetchMoreProductsByCategory",
+  async (itemsNumber, { rejectWithValue, getState, dispatch }) => {
+    const activeCategory = getState().filter.activeCategory.id;
+    const limit = getState().products.limit;
+    try {
+      dispatch(setLoading());
+      const response = await axios(
+        `/api/categories/${activeCategory}/products?offset=${itemsNumber}&limit=${limit}`
+      );
+
+      const data = response.data;
+      const oldProductsList = getState().products.productsList;
+      const newProductsList = [...oldProductsList, ...data];
+      dispatch(setProducts(newProductsList));
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    } finally {
+      dispatch(resetLoading());
+    }
+  }
+);
+
+export const fetchMoreProductsBySort = createAsyncThunk(
+  "products/fetchMoreProductsBySort",
+  async (itemsNumber, { rejectWithValue, getState, dispatch }) => {
+    const sortBy = getState().filter.activeSortBy;
+    const limit = getState().products.limit;
+    try {
+      dispatch(setLoading());
+      const response = await axios(
+        `/api/products?offset=${itemsNumber}&limit=${limit}&sortBy=${sortBy.value}`
+      );
+      const data = response.data;
+      const oldProductsList = getState().products.productsList;
+      const newProductsList = [...oldProductsList, ...data];
+      dispatch(setProducts(newProductsList));
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    } finally {
+      dispatch(resetLoading());
+    }
+  }
+);
 const setError = (state, action) => {
   state.status = "rejected";
   state.error = action.payload;

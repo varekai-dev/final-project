@@ -1,24 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { resetCategories } from "./filterSlice";
 import { resetLoading, setLoading } from "./statusSlice";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async (_, { rejectWithValue, dispatch, getState }) => {
-    const sortBy = getState().filter.activeSortBy;
     const limit = getState().products.limit;
     try {
-      if (sortBy) {
-        dispatch(resetCategories());
-      }
       dispatch(setLoading());
-      const response = await axios(
-        `/api/products?offset=0&limit=${limit}${
-          sortBy ? `&sortBy=${sortBy.value}` : ""
-        }`
-      );
-
+      const response = await axios(`/api/products?offset=0&limit=${limit}`);
       const data = response.data;
       dispatch(setProducts(data));
       dispatch(setInitialProducts(data));
@@ -45,7 +35,7 @@ export const fetchMoreProducts = createAsyncThunk(
       const oldProductsList = getState().products.productsList;
 
       const newProductsList = [...oldProductsList, ...data];
-      return newProductsList;
+      dispatch(setProducts(newProductsList));
     } catch (error) {
       return rejectWithValue(error.response.data.error);
     } finally {
@@ -89,8 +79,6 @@ const productsSlice = createSlice({
   extraReducers: {
     [fetchProducts.fulfilled]: setResolved,
     [fetchProducts.rejected]: setError,
-    [fetchMoreProducts.fulfilled]: setResolved,
-    [fetchMoreProducts.rejected]: setError,
   },
 });
 

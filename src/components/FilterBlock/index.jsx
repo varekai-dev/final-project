@@ -8,20 +8,19 @@ import {
   fetchCategories,
   fetchProductsByCategory,
   fetchProductsBySearch,
+  fetchProductsBySort,
+  resetCategories,
+  resetSortBy,
 } from "../../redux/slices/filterSlice";
 import s from "./FilterBlock.module.scss";
 import SelectInput from "../SelectInput/SelectInput";
-import {
-  fetchProducts,
-  resetToInitialProducts,
-} from "../../redux/slices/productsSlice";
+import { resetToInitialProducts } from "../../redux/slices/productsSlice";
 
 const options = [
   { value: "popular", label: "Popular" },
   { value: "latest", label: "New" },
 ];
 
-//TODO при скиданні категорій витягувати продукти з редаксу, а не фетчити
 const FilterBlock = () => {
   const dispatch = useDispatch();
   const [input, setInput] = React.useState("");
@@ -29,6 +28,7 @@ const FilterBlock = () => {
   const { activeCategory, activeSortBy, categories } = useSelector(
     (state) => state.filter
   );
+
   const isSelectShow = !focused && input.length === 0;
   React.useEffect(() => {
     if (categories.length === 0) {
@@ -39,18 +39,20 @@ const FilterBlock = () => {
   const handleCategory = (value) => {
     dispatch(chooseCategory(value));
     dispatch(fetchProductsByCategory());
+    dispatch(resetSortBy());
   };
 
   const handleSortBy = (value) => {
     dispatch(chooseSortBy(value));
-    dispatch(fetchProducts());
+    dispatch(fetchProductsBySort());
+    dispatch(resetCategories());
   };
 
   const handleSearch = React.useCallback(
     (text) => {
       const value = text.toLowerCase();
       dispatch(changeSearchValue(value));
-
+      dispatch(resetSortBy());
       dispatch(fetchProductsBySearch());
     },
     [dispatch]
@@ -73,6 +75,13 @@ const FilterBlock = () => {
       dispatch(resetToInitialProducts());
     }
   }, [input, handleSearch, dispatch]);
+
+  React.useEffect(() => {
+    if (activeCategory === null || activeSortBy === null) {
+      dispatch(resetToInitialProducts());
+    }
+  }, [activeCategory, dispatch, activeSortBy]);
+
   return (
     <div className={s.filterBlock}>
       <div className={s.search}>
@@ -105,9 +114,9 @@ const FilterBlock = () => {
             <SelectInput
               options={options}
               icon={<BookmarkIcon />}
-              value={activeSortBy}
               placeholder="Sorting"
               onChange={handleSortBy}
+              value={activeSortBy}
               defaultValue={activeSortBy}
             />
           </div>
