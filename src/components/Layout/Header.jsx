@@ -5,23 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/slices/userSlice";
 import { setActivePopup } from "../../redux/slices/popupSlice";
 import { selectUserData } from "../../redux/selectors";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { firstLettersUpperCase } from "../../utils/helpers";
 
 const Header = () => {
+  const history = useHistory();
   const [isMenuActive, setMenuActive] = React.useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUserData);
   const orders = useSelector((state) => state.orders.orders);
   const username = user ? user.account.fullName : false;
-  const firstLettersUpperCase = (username) => {
-    if (!username) {
-      return;
-    }
-    const userNameFirstLetters = username
-      .split(" ")
-      .map((word) => word[0].toUpperCase());
-    return userNameFirstLetters.join("");
-  };
+
   const handleLogout = async () => {
     dispatch(setUser(null));
     localStorage.removeItem("user");
@@ -75,7 +69,9 @@ const Header = () => {
                         <p>{user.account.email}</p>
                       </div>
                       <div className="header-settings__btns">
-                        <button>Settings</button>
+                        <button onClick={() => history.push("/settings")}>
+                          Settings
+                        </button>
                         <button onClick={handleLogout}>Log out</button>
                       </div>
                     </div>
