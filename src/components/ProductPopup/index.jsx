@@ -52,14 +52,19 @@ const ProductPopup = ({ id }) => {
       dispatch(setActivePopup("guestPopup"));
     }
   };
-  const addToCart = () => {
+
+  const addProduct = () => {
     dispatch(addProductToOrder({ product, count }));
     dispatch(setActivePopup(null));
+  };
+
+  const addToCart = () => {
+    addProduct();
     dispatch(addNotification(product.title));
     history.push("/");
   };
   const buyOrder = () => {
-    addToCart();
+    addProduct();
     history.push("/cart");
   };
   React.useEffect(() => {

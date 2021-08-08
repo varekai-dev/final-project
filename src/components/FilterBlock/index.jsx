@@ -9,27 +9,27 @@ import {
   fetchProductsByCategory,
   fetchProductsBySearch,
 } from "../../redux/slices/filterSlice";
-import { DebounceInput } from "react-debounce-input";
 import s from "./FilterBlock.module.scss";
 import SelectInput from "../SelectInput/SelectInput";
-import { fetchProducts } from "../../redux/slices/productsSlice";
+import {
+  fetchProducts,
+  resetToInitialProducts,
+} from "../../redux/slices/productsSlice";
 
 const options = [
   { value: "popular", label: "Popular" },
   { value: "latest", label: "New" },
 ];
-//TODO при стиранні пошукового інпута два значення стираються самостійно
 
 //TODO при скиданні категорій витягувати продукти з редаксу, а не фетчити
 const FilterBlock = () => {
   const dispatch = useDispatch();
+  const [input, setInput] = React.useState("");
   const [focused, setFocused] = React.useState(false);
-  const { activeCategory, activeSortBy, categories, searchValue } = useSelector(
+  const { activeCategory, activeSortBy, categories } = useSelector(
     (state) => state.filter
   );
-
-  console.log(activeCategory);
-  const isSelectShow = !focused && searchValue.length === 0;
+  const isSelectShow = !focused && input.length === 0;
   React.useEffect(() => {
     if (categories.length === 0) {
       dispatch(fetchCategories());
@@ -46,34 +46,43 @@ const FilterBlock = () => {
     dispatch(fetchProducts());
   };
 
-  const handleSearch = (text) => {
-    const value = text.toLowerCase();
-    dispatch(changeSearchValue(value));
+  const handleSearch = React.useCallback(
+    (text) => {
+      const value = text.toLowerCase();
+      dispatch(changeSearchValue(value));
 
-    dispatch(fetchProductsBySearch());
-
-    if (value.length === 0) {
-      dispatch(fetchProducts());
-    }
-  };
+      dispatch(fetchProductsBySearch());
+    },
+    [dispatch]
+  );
 
   const onFocus = () => {
     setFocused(true);
   };
   const onBlur = () => setFocused(false);
+  React.useEffect(() => {
+    if (input.length >= 3) {
+      const timeout = setTimeout(() => {
+        handleSearch(input);
+      }, 300);
 
+      return () => clearTimeout(timeout);
+    }
+
+    if (input.length === 0) {
+      dispatch(resetToInitialProducts());
+    }
+  }, [input, handleSearch, dispatch]);
   return (
     <div className={s.filterBlock}>
       <div className={s.search}>
-        <DebounceInput
-          minLength={3}
-          debounceTimeout={300}
+        <input
           type="text"
           placeholder="Search products by name"
           onFocus={onFocus}
           onBlur={onBlur}
-          value={searchValue}
-          onChange={(e) => handleSearch(e.target.value)}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
         />
 
         <i className={s.searchIcon}>

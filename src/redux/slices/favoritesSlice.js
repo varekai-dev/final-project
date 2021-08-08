@@ -6,8 +6,6 @@ import { resetLoading, setLoading } from "./statusSlice";
 export const addProductToFavorite = createAsyncThunk(
   "products/addProductToFavorite",
   async (id, { rejectWithValue, dispatch, getState }) => {
-    const singleProduct = getState().singleProduct.product;
-
     try {
       dispatch(setLoading());
       const response = await axios.post(`/api/products/${id}/favorite`);

@@ -18,10 +18,10 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const showLoadMore = products.length > 0 && products.length % limit === 0;
   React.useEffect(() => {
-    if (products.length === 0) {
+    if (products.length === 0 && searchValue.length === 0) {
       dispatch(fetchProducts());
     }
-  }, [dispatch, products]);
+  }, [dispatch, products, searchValue]);
 
   return (
     <div className="container">
