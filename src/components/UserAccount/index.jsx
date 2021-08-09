@@ -1,85 +1,59 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import Button from "../Button";
-import { CartSchema } from "../Form/CartForm/CartSchema";
-import Input from "../Form/Input";
-import SelectWithPlaceholder from "../Form/SelectWithPlaceholder";
+import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeUserData } from '../../redux/slices/userSlice';
+import Button from '../Button';
+import { UserSchema } from './UserSchema';
+import Input from '../Form/Input';
+import SelectWithPlaceholder from '../Form/SelectWithPlaceholder';
 
-import s from "./UserAccount.module.scss";
+import s from './UserAccount.module.scss';
+import Notification from '../Notification';
 
 const UserAccount = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(CartSchema),
-  });
-  const user = useSelector((state) => state.user.userData);
-  React.useEffect(() => {
-    if (user) {
-      setValue("fullName", user.account.fullName);
-      setValue("phone", user.account.phone);
-    }
-  }, [user, setValue]);
-
-  const onSubmit = async (data) => {
-    console.log(data);
-  };
-  return (
-    <div className={s.account}>
-      <h2>Main information</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          label="Full Name"
-          {...register("fullName")}
-          type="text"
-          name="fullName"
-          error={!!errors.fullName}
-          helperText={errors?.fullName?.message}
-        />
-        <Input
-          label="Phone number"
-          {...register("phone")}
-          type="tel"
-          name="phone"
-          error={!!errors.phone}
-          helperText={errors?.phone?.message}
-        />
-        <SelectWithPlaceholder
-          setValue={setValue}
-          label="Country"
-          {...register("country")}
-          name="country"
-          error={!!errors.country}
-          helperText={errors?.country?.message}
-        />
-        <Input
-          label="City"
-          {...register("city")}
-          type="text"
-          name="city"
-          error={!!errors.city}
-          helperText={errors?.city?.message}
-        />
-        <Input
-          label="Address"
-          {...register("address")}
-          type="text"
-          name="address"
-          error={!!errors.address}
-          helperText={errors?.address?.message}
-        />
-        <Button color="orange" type="submit">
-          Save
-        </Button>
-      </form>
-    </div>
-  );
+	const dispatch = useDispatch();
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		clearErrors,
+		formState: { errors }
+	} = useForm({
+		mode: 'onChange',
+		resolver: yupResolver(UserSchema)
+	});
+	const user = useSelector((state) => state.user.userData);
+	React.useEffect(() => {
+		if (user) {
+			setValue('fullName', user.account.fullName);
+			setValue('phone', user.account.phone);
+			setValue('email', user.account.email);
+			setValue('country', user.account.country);
+			setValue('city', user.account.city);
+			setValue('address', user.account.address);
+		}
+	}, [user, setValue]);
+	const onSubmit = async (data) => {
+		dispatch(changeUserData(data));
+	};
+	return (
+		<div className={s.account}>
+			<Notification />
+			<h2>Main information</h2>
+			<form noValidate onSubmit={handleSubmit(onSubmit)}>
+				<Input label="Full Name" {...register('fullName')} type="text" name="fullName" error={!!errors.fullName} helperText={errors?.fullName?.message} />
+				<Input label="Phone number" {...register('phone')} type="tel" name="phone" error={!!errors.phone} helperText={errors?.phone?.message} />
+				<Input label="Email" {...register('email')} type="text" name="email" error={!!errors.email} helperText={errors?.email?.message} />
+				<SelectWithPlaceholder setValue={setValue} label="Country" {...register('country')} name="country" error={!!errors.country} helperText={errors?.country?.message} defaultValue={user.account.country} clearErrors={clearErrors} />
+				<Input label="City" {...register('city')} type="text" name="city" error={!!errors.city} helperText={errors?.city?.message} />
+				<Input label="Address" {...register('address')} type="text" name="address" error={!!errors.address} helperText={errors?.address?.message} />
+				<Button color="orange" type="submit" disabled={Object.keys(errors).length !== 0}>
+					Save
+				</Button>
+			</form>
+		</div>
+	);
 };
 
 export default UserAccount;

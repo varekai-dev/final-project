@@ -5,18 +5,19 @@ import { ChevronIcon, CloseIcon } from '../../../assets/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCountries } from '../../../redux/slices/ordersSlice';
 
-const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label, setValue }, ref) => {
+const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label, setValue, defaultValue, clearErrors, ...props }, ref) => {
 	const [isOpen, setOpen] = React.useState(false);
 	const wrapperRef = React.useRef(null);
 	const dispatch = useDispatch();
 	const countries = useSelector((state) => state.orders.countries);
-	const [selectedItem, setSelectedItem] = React.useState('');
+	const [selectedItem, setSelectedItem] = React.useState(defaultValue || '');
 	const toggleDropdown = () => {
 		setOpen(!isOpen);
 	};
 	const handleItemClick = (id) => {
 		selectedItem === id ? setSelectedItem(null) : setSelectedItem(countries[id].label);
 		setValue(name, countries[id].label);
+		clearErrors('country');
 	};
 
 	const handleClickOutside = (event) => {
@@ -33,8 +34,7 @@ const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label, setV
 	React.useEffect(() => {
 		dispatch(fetchCountries());
 	}, [dispatch]);
-	const handleClose = (e) => {
-		e.stopPropagation();
+	const handleClose = () => {
 		setSelectedItem('');
 		setValue(name, '');
 	};
@@ -45,7 +45,7 @@ const SelectWithPlaceholder = forwardRef(({ helperText, error, name, label, setV
 				<div className={clsx(s.dropdown, error && s.error)}>
 					<div className={s.dropdownHeader} onClick={toggleDropdown} ref={wrapperRef}>
 						<label className={clsx(s.label, selectedItem && s.labelActive, error && s.error)}>{label}</label>
-						<input value={selectedItem} name={name} readOnly />
+						<input value={selectedItem} name={name} readOnly {...props} />
 
 						{!selectedItem ? (
 							<i className={s.icon}>

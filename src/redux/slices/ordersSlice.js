@@ -45,7 +45,6 @@ export const makeOrder = createAsyncThunk('orders/makeOrder', async (shipment, {
 	try {
 		const response = await axios.post('/api/orders', order);
 		const data = response.data;
-		console.log(data);
 		dispatch(setActivePopup('purchasePopup'));
 		dispatch(clearOrders());
 		return data;
@@ -59,7 +58,6 @@ const orderSlice = createSlice({
 	initialState: {
 		orders: [],
 		error: null,
-		lastOrder: null,
 		countries: [],
 		activeCountry: null
 	},
@@ -98,9 +96,7 @@ const orderSlice = createSlice({
 			const newOrders = state.orders.map((order) => (order.id === action.payload.id ? { ...order, quantity: order.quantity !== 1 ? order.quantity - 1 : 1 } : order));
 			state.orders = newOrders;
 		},
-		addNotification(state, action) {
-			state.lastOrder = action.payload;
-		},
+
 		addCountries(state, action) {
 			state.countries = action.payload;
 		},
@@ -118,6 +114,6 @@ const orderSlice = createSlice({
 	}
 });
 
-export const { clearOrders, addProductToOrder, removeProductFromOrder, addNotification, increaseQuantity, decreaseQuantity, addCountries } = orderSlice.actions;
+export const { clearOrders, addProductToOrder, removeProductFromOrder, increaseQuantity, decreaseQuantity, addCountries } = orderSlice.actions;
 
 export default orderSlice.reducer;

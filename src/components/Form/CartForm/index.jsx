@@ -22,6 +22,7 @@ const CartForm = () => {
 		register,
 		handleSubmit,
 		setValue,
+		clearErrors,
 		formState: { errors }
 	} = useForm({
 		mode: 'onBlur',
@@ -35,6 +36,10 @@ const CartForm = () => {
 		if (user) {
 			setValue('fullName', user.account.fullName);
 			setValue('phone', user.account.phone);
+			setValue('email', user.account.email);
+			setValue('country', user.account.country);
+			setValue('city', user.account.city);
+			setValue('address', user.account.address);
 		}
 	}, [user, setValue]);
 
@@ -43,7 +48,7 @@ const CartForm = () => {
 			<form noValidate onSubmit={handleSubmit(onSubmit)}>
 				<Input label="Full Name" {...register('fullName')} type="text" name="fullName" error={!!errors.fullName} helperText={errors?.fullName?.message} />
 				<Input label="Phone number" {...register('phone')} type="tel" name="phone" error={!!errors.phone} helperText={errors?.phone?.message} />
-				<SelectWithPlaceholder setValue={setValue} label="Country" {...register('country')} name="country" error={!!errors.country} helperText={errors?.country?.message} />
+				<SelectWithPlaceholder clearErrors={clearErrors} setValue={setValue} label="Country" {...register('country')} name="country" error={!!errors.country} helperText={errors?.country?.message} defaultValue={user.account.country} />
 				<Input label="City" {...register('city')} type="text" name="city" error={!!errors.city} helperText={errors?.city?.message} />
 				<Input label="Address" {...register('address')} type="text" name="address" error={!!errors.address} helperText={errors?.address?.message} />
 				<div className={s.info}>
