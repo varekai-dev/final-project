@@ -32,7 +32,7 @@ const UserMenu = () => {
 		localStorage.removeItem('user');
 	};
 	const handleSettings = () => {
-		history.push('/settings');
+		history.push('/settings?tab=account');
 		setMenuActive(false);
 	};
 	return (

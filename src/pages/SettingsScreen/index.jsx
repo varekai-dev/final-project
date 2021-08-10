@@ -6,8 +6,16 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ChangePassword from '../../components/ChangePassword';
 import s from './SettingsScreen.module.scss';
 import UserAccount from '../../components/UserAccount';
+import FavoriteBlock from '../../components/FavoriteBlock';
+import { useLocation } from 'react-router-dom';
+
+const tabs = ['account', 'history', 'favorites'];
 
 const SettingsScreen = () => {
+	const { search } = useLocation();
+	const tabFromLink = search.split('tab=')[1];
+	const indexTabFromLink = tabs.findIndex((item) => item === tabFromLink);
+	const [activeTab, setActiveTab] = React.useState(indexTabFromLink || 0);
 	const history = useHistory();
 	const user = useSelector((state) => state.user.userData);
 	const userExist = localStorage.getItem('user');
@@ -16,6 +24,14 @@ const SettingsScreen = () => {
 			history.push('/');
 		}
 	}, [userExist, history]);
+
+	React.useEffect(() => {
+		history.push(`?tab=${tabs[activeTab]}`);
+	}, [activeTab, history]);
+	const changeTab = (tabIndex) => {
+		setActiveTab(tabIndex);
+	};
+
 	return (
 		<>
 			{userExist && user && (
@@ -25,7 +41,7 @@ const SettingsScreen = () => {
 						<div className={s.userName}>{user.account.fullName}</div>
 					</div>
 
-					<Tabs className={s.tabs} selectedTabClassName={s.selectedTab}>
+					<Tabs selectedIndex={activeTab} onSelect={(tabIndex) => changeTab(tabIndex)} className={s.tabs} selectedTabClassName={s.selectedTab}>
 						<TabList className={s.tabList}>
 							<Tab className={s.tab}>Edit Account</Tab>
 							<Tab className={s.tab}>Orders History</Tab>
@@ -39,7 +55,7 @@ const SettingsScreen = () => {
 							<h2>Orders History</h2>
 						</TabPanel>
 						<TabPanel className={s.tabPanel}>
-							<h2>Favourites</h2>
+							<FavoriteBlock />
 						</TabPanel>
 					</Tabs>
 				</div>

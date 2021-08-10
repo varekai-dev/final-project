@@ -22,7 +22,9 @@ const Header = () => {
 						<LogoIcon />
 					</Link>
 					<div className="header-icons">
-						<LikeIcon fill="#ffffff" />
+						<Link to={'/settings?tab=favorites'}>
+							<LikeIcon fill="#ffffff" />
+						</Link>
 						<Link to={'/cart'}>
 							{orders.length > 0 && <span className="header-cart__count"> {orders.length}</span>}
 							<CartIcon />
