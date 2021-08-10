@@ -1,0 +1,38 @@
+@import '../../styles/variables';
+
+.orderItem {
+	background: #ffffff;
+	border: 1px solid #eceef0;
+	box-sizing: border-box;
+	box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
+	border-radius: 4px;
+	margin-bottom: 20px;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 22px;
+	button {
+		cursor: pointer;
+		color: $blue;
+		font-weight: 500;
+		font-size: 15px;
+		line-height: 22px;
+		text-decoration-line: underline;
+		margin-bottom: 5px;
+	}
+}
+.orderLeft {
+	display: flex;
+}
+.orderTitle {
+	margin-right: 15px;
+	color: $textGrey;
+	div:first-child {
+		margin-bottom: 5px;
+	}
+}
+.orderInfo {
+	font-weight: 500;
+}

@@ -8,6 +8,7 @@ import s from './SettingsScreen.module.scss';
 import UserAccount from '../../components/UserAccount';
 import FavoriteBlock from '../../components/FavoriteBlock';
 import { useLocation } from 'react-router-dom';
+import OrderHistory from '../../components/OrderHistory';
 
 const tabs = ['account', 'history', 'favorites'];
 
@@ -52,7 +53,7 @@ const SettingsScreen = () => {
 							<ChangePassword />
 						</TabPanel>
 						<TabPanel className={s.tabPanel}>
-							<h2>Orders History</h2>
+							<OrderHistory />
 						</TabPanel>
 						<TabPanel className={s.tabPanel}>
 							<FavoriteBlock />

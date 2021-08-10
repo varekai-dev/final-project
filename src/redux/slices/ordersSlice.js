@@ -31,6 +31,16 @@ export const fetchCountries = createAsyncThunk('orders/fetchCountries', async (_
 	}
 });
 
+export const fetchOrdersFromServer = createAsyncThunk('orders/fetchOrdersFromServer', async (_, { rejectWithValue, dispatch }) => {
+	try {
+		const response = await axios('/api/orders');
+		const data = response.data;
+		dispatch(addOrdersFromServer(data));
+	} catch (error) {
+		return rejectWithValue(error.response.data.error);
+	}
+});
+
 export const makeOrder = createAsyncThunk('orders/makeOrder', async (shipment, { rejectWithValue, dispatch, getState }) => {
 	const orders = getState().orders.orders;
 	const items = orders.map((order) => ({
@@ -59,7 +69,9 @@ const orderSlice = createSlice({
 		orders: [],
 		error: null,
 		countries: [],
-		activeCountry: null
+		activeCountry: null,
+		ordersFromServer: [],
+		singleOrderItem: null
 	},
 	reducers: {
 		addProductToOrder(state, action) {
@@ -102,6 +114,12 @@ const orderSlice = createSlice({
 		},
 		clearOrders(state) {
 			state.orders = [];
+		},
+		addOrdersFromServer(state, action) {
+			state.ordersFromServer = action.payload;
+		},
+		addSingleOrderItem(state, action) {
+			state.singleOrderItem = action.payload;
 		}
 	},
 	extraReducers: {
@@ -114,6 +132,6 @@ const orderSlice = createSlice({
 	}
 });
 
-export const { clearOrders, addProductToOrder, removeProductFromOrder, increaseQuantity, decreaseQuantity, addCountries } = orderSlice.actions;
+export const { addSingleOrderItem, addOrdersFromServer, clearOrders, addProductToOrder, removeProductFromOrder, increaseQuantity, decreaseQuantity, addCountries } = orderSlice.actions;
 
 export default orderSlice.reducer;
