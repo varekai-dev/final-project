@@ -1,65 +1,83 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 .productItem {
-	box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
-	border-radius: 4px;
-	background: #ffffff;
-	padding: 4px;
-
-	border: 1px solid #e4e4e4;
-	width: calc(25% - 8px);
-	img {
-		border-radius: 3px;
-	}
+  box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
+  border-radius: 4px;
+  background: #ffffff;
+  padding: 4px;
+  border: 1px solid #e4e4e4;
+  width: calc(25% - 8px);
+  margin: 0 0 8px 8px;
+  img {
+    border-radius: 3px;
+  }
 }
 .productImage {
-	display: flex;
-	justify-content: center;
-	position: relative;
-	margin-bottom: 12px;
-	filter: contrast(0.93);
-	cursor: pointer;
-	img {
-		max-width: 100%;
-	}
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 12px;
+  filter: contrast(0.93);
+  cursor: pointer;
+  img {
+    max-width: 100%;
+  }
 }
 .productFavorite {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	right: 8px;
-	bottom: -15px;
-	width: 30px;
-	height: 30px;
-	background: #ffffff;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.163407);
-	border-radius: 50%;
-	cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 8px;
+  bottom: -15px;
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.163407);
+  border-radius: 50%;
+  cursor: pointer;
 }
 .productIcon:hover {
-	fill: $textLight;
-	path {
-		stroke: transparent;
-	}
+  fill: $textLight;
+  path {
+    stroke: transparent;
+  }
 }
 .description {
-	padding: 6px 12px;
+  padding: 6px 12px;
 }
 
 .title {
-	display: -webkit-box;
-	-webkit-line-clamp: 1;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	color: $textDark;
-	font-size: 15px;
-	line-height: 22px;
-	margin-bottom: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: $textDark;
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 2px;
 }
 .price {
-	font-size: 18px;
-	line-height: 26px;
-	font-weight: bold;
-	letter-spacing: 0.5px;
-	color: $header;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: $header;
+}
+
+@media (max-width: 900px) {
+  .productItem {
+    width: calc(33.33% - 8px);
+  }
+}
+
+@media (max-width: 700px) {
+  .productItem {
+    width: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 475px) {
+  .productItem {
+    width: 100%;
+  }
 }

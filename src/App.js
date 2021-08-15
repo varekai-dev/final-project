@@ -1,6 +1,8 @@
 import Layout from "./components/Layout/Layout";
 import { Route } from "react-router-dom";
+
 import { HomeScreen, CartScreen, SettingsScreen } from "./pages";
+
 import "macro-css";
 import "./styles/app.scss";
 

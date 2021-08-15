@@ -1,12 +1,20 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import CartItem from '../CartItem';
+import React from "react";
+import { useSelector } from "react-redux";
 
-import s from './CartList.module.scss';
+import CartItem from "../CartItem";
+
+import s from "./CartList.module.scss";
 
 const CartList = () => {
-	const orders = useSelector((state) => state.orders.orders);
-	return <div className={s.cartList}>{orders && orders.map((order) => <CartItem key={order.id} order={order} component="order" />)}</div>;
+  const orders = useSelector((state) => state.orders.orders);
+  return (
+    <div className={s.cartList}>
+      {orders &&
+        orders.map((order) => (
+          <CartItem key={order.id} order={order} component="cart" />
+        ))}
+    </div>
+  );
 };
 
 export default CartList;

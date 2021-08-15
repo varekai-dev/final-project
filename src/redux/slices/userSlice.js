@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 import { addNotification } from "./notificationSlice";
 import { setActivePopup } from "./popupSlice";
 import { fetchProducts } from "./productsSlice";

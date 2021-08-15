@@ -1,93 +1,118 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .settings {
-	padding: 62px 0 42px;
-	margin: 0 auto;
-	max-width: 904px;
-	height: 100%;
-	width: 100%;
-	background: #ffffff;
-	border: 1px solid #e4e4e4;
-	box-shadow: 0px 5px 15px rgba(121, 121, 121, 0.0527344);
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	flex-direction: column;
-	h2 {
-		color: #000000;
-		font-size: 18px;
-		line-height: 24px;
-		letter-spacing: 0.15px;
-		margin-bottom: 30px;
-		font-weight: normal;
-	}
+  padding: 62px 0 42px;
+  margin: 0 auto;
+  max-width: 904px;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0px 5px 15px rgba(121, 121, 121, 0.0527344);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  h2 {
+    color: #000000;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    margin-bottom: 30px;
+    font-weight: normal;
+  }
 }
 .user {
-	color: $header;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  color: $header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .userBlock {
-	width: 88px;
-	height: 88px;
-	border-radius: 50%;
-	background: #dedee0;
-	font-size: 24px;
-	line-height: 26px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 8px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #dedee0;
+  font-size: 24px;
+  line-height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
 }
 .userName {
-	font-size: 22px;
-	line-height: 32px;
-	margin-bottom: 22px;
+  font-size: 22px;
+  line-height: 32px;
+  margin-bottom: 22px;
 }
 .tabs {
-	width: 100%;
+  width: 100%;
+  padding: 0 15px;
 }
 .tabList {
-	width: 100%;
-	max-width: 485px;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	white-space: nowrap;
-	height: 74px;
-	margin-bottom: 62px;
-	.tab:first-child {
-		border-left: 1px solid #dedee0;
-	}
+  width: 100%;
+  max-width: 485px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  height: 74px;
+  margin-bottom: 62px;
+  .tab:first-child {
+    border-left: 1px solid #dedee0;
+  }
 }
 .tab {
-	cursor: pointer;
-	width: 33.33%;
-	font-size: 15px;
-	line-height: 22px;
-	text-align: center;
-	padding: 29px 33px;
-	border: 1px solid #dedee0;
-	border-left: none;
+  cursor: pointer;
+  width: 33.33%;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  padding: 29px 33px;
+  border: 1px solid #dedee0;
+  border-left: none;
 }
 .selectedTab {
-	background: #fd7114;
-	color: white;
-	position: relative;
-	cursor: unset;
-	&::before {
-		bottom: -10px;
-		right: 50%;
-		transform: translateX(50%);
-		content: '';
-		position: absolute;
-		width: 0;
-		height: 0;
-		border-style: solid;
-		border-width: 10px 9px 0 9px;
-		border-color: #fd7114 transparent transparent transparent;
-	}
+  background: #fd7114;
+  color: white;
+  position: relative;
+  cursor: unset;
+  &::before {
+    bottom: -10px;
+    right: 50%;
+    transform: translateX(50%);
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 9px 0 9px;
+    border-color: #fd7114 transparent transparent transparent;
+  }
+}
+
+@media (max-width: 550px) {
+  .tabList {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .tab {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    max-width: 377px;
+    width: 100%;
+    border-left: 1px solid #dedee0;
+  }
+  .selectedTab::before {
+    display: none;
+  }
+  .settings {
+    h2 {
+      text-align: center;
+    }
+  }
 }

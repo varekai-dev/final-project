@@ -1,276 +1,298 @@
-@import './variables';
-@import './libs/normalize';
+@import "./variables";
+@import "./libs/normalize";
 
 .app {
-	font-family: 'Heebo', sans-serif;
-	color: $textDark;
-	font-size: 15px;
-	line-height: 22px;
-	font-weight: 400;
+  font-family: "Heebo", sans-serif;
+  color: $textDark;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
 }
 
 input,
 textarea {
-	font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .wrapper {
-	height: 100vh;
+  height: 100vh;
 }
 .header,
 .footer {
-	flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+  flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
 }
 .content {
-	flex: 1 0 auto;
-	background: $bg;
+  flex: 1 0 auto;
+  background: $bg;
 }
 .header {
-	background-color: $header;
-	&__inner {
-		max-width: 1118px;
-		width: 100%;
-		margin: 0 auto;
-		min-height: 76px;
-	}
-	&-buttons {
-		margin-left: 42px;
-	}
-	&-icons {
-		display: flex;
-		div {
-			cursor: pointer;
-		}
-		a:last-child {
-			margin-left: 25px;
-			position: relative;
-		}
-	}
-	&-cart__count {
-		position: absolute;
-		top: -10px;
-		right: -10px;
-		background: #fd7114;
-		border: 1px solid #110f21;
-		width: 20px;
-		height: 20px;
-		font-weight: 500;
-		font-size: 12px;
-		line-height: 15px;
-		color: #110f21;
-		text-transform: uppercase;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: 50%;
-	}
-	&-auth__btns {
-		& button {
-			cursor: pointer;
-			font-size: 12px;
-			line-height: 18px;
-			padding: 0 16px;
-			color: white;
-		}
-		button:first-child {
-			border-right: 2px solid $orange;
-		}
-	}
-	&-user {
-		&__chevron {
-			transition: all 0.3s;
-			&.rotate {
-				transform: rotate(-180deg);
-			}
-		}
-		&__wrapper {
-			color: #fff;
-			position: relative;
-			cursor: pointer;
-		}
-		&__logo {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			background: #dedee0;
-			border: 2px solid #fd7114;
-			margin-right: 11px;
-			margin-left: 15px;
-			color: #110f21;
-		}
-	}
+  background-color: $header;
+  &__inner {
+    max-width: 1148px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    min-height: 76px;
+  }
+  &-buttons {
+    margin-left: 42px;
+  }
+  &-icons {
+    display: flex;
+    div {
+      cursor: pointer;
+    }
+    a:last-child {
+      margin-left: 25px;
+      position: relative;
+    }
+  }
+  &-cart__count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #fd7114;
+    border: 1px solid #110f21;
+    width: 20px;
+    height: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #110f21;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  &-auth__btns {
+    & button {
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 18px;
+      padding: 0 16px;
+      color: white;
+    }
+    button:first-child {
+      border-right: 2px solid $orange;
+    }
+  }
+  &-user {
+    &__chevron {
+      transition: all 0.3s;
+      &.rotate {
+        transform: rotate(-180deg);
+      }
+    }
+    &__wrapper {
+      color: #fff;
+      position: relative;
+      cursor: pointer;
+    }
+    &__logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #dedee0;
+      border: 2px solid #fd7114;
+      margin-right: 11px;
+      margin-left: 15px;
+      color: #110f21;
+    }
+  }
 }
 .header-settings {
-	cursor: default;
-	z-index: 5;
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	top: 58px;
-	right: 0;
-	background-color: #fff;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
-	min-width: 234px;
-	&__user {
-		padding: 16px 17px;
-		border-bottom: 1px solid #e4e4e4;
-	}
-	&__btns {
-		display: flex;
-		flex-direction: column;
-		padding: 16px;
-		button {
-			text-align: left;
-			cursor: pointer;
-			color: $textDark;
-			font-size: 14px;
-			line-height: 26px;
-		}
-		button:last-child {
-			margin-top: 11px;
-			color: $orange;
-		}
-	}
+  cursor: default;
+  z-index: 5;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 58px;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  min-width: 234px;
+  &__user {
+    padding: 16px 17px;
+    border-bottom: 1px solid #e4e4e4;
+  }
+  &__btns {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    button {
+      text-align: left;
+      cursor: pointer;
+      color: $textDark;
+      font-size: 14px;
+      line-height: 26px;
+    }
+    button:last-child {
+      margin-top: 11px;
+      color: $orange;
+    }
+  }
 }
 .container {
-	max-width: 860px;
-	margin: 0 auto;
-	width: 100%;
-	height: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
 }
 
 .footer {
-	background-color: $footer;
-	min-height: 76px;
-	font-size: 14px;
-	line-height: 26px;
+  background-color: $footer;
+  min-height: 76px;
+  font-size: 14px;
+  line-height: 26px;
 }
 
 .close-btn {
-	position: absolute;
-	top: 22px;
-	right: 22px;
-	cursor: pointer;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
 }
 
 //startselect
 .select-input {
-	position: relative;
-	&__icon {
-		position: absolute;
-		top: 50%;
-		display: flex;
-		z-index: 2;
-		left: 8px;
-		transform: translateY(-50%);
-	}
+  position: relative;
+  &__icon {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    z-index: 2;
+    left: 8px;
+    transform: translateY(-50%);
+  }
 }
 .react-select-container .select {
-	&__menu {
-		margin: 0;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		border-top: unset;
-	}
-	&__indicator {
-		position: absolute;
-		right: 10px;
-		padding: 0;
-	}
-	&__menu-list {
-		padding: 0;
-		max-height: 480px;
-		z-index: 3;
-		position: relative;
-	}
-	&__clear-indicator {
-		position: absolute;
-		right: 12px;
-	}
-	&__value-container {
-		padding: 0;
-	}
-	&__value-container--has-value {
-		& .select__dropdown-indicator {
-			display: none;
-		}
-	}
-	&__control {
-		position: relative;
-		height: 37px;
-		background-color: #f9fafb;
-		border: 1px solid #dedee0;
-		box-sizing: border-box;
-		border-radius: 5px;
-		font-size: 14px;
-		line-height: 26px;
-		padding: 0 30px;
-		color: #707070;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		&:hover {
-			border-color: #dedee0;
-		}
-	}
-	&__option {
-		cursor: pointer;
-		font-size: 14px;
-		line-height: 26px;
-		padding: 7px 12px;
-		color: $textDark;
-		&:active {
-			background-color: #c2bebe;
-		}
-	}
-	&__control--is-focused {
-		box-shadow: unset;
-		border-color: none;
-		outline: none;
-	}
-	&__option--is-focused {
-		background-color: #f2f2f2;
-	}
-	&__option--is-selected {
-		background-color: #dfdbdb;
-	}
+  &__menu {
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: unset;
+    z-index: 5;
+  }
+  &__indicator {
+    position: absolute;
+    right: 10px;
+    padding: 0;
+    cursor: pointer;
+  }
+  &__menu-list {
+    padding: 0;
+    max-height: 480px;
+    z-index: 3;
+    position: relative;
+  }
+  &__clear-indicator {
+    position: absolute;
+    right: 12px;
+  }
+  &__value-container {
+    padding: 0;
+  }
+  &__value-container--has-value {
+    & .select__dropdown-indicator {
+      display: none;
+    }
+  }
+  &__control {
+    position: relative;
+    height: 37px;
+    background-color: #f9fafb;
+    border: 1px solid #dedee0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 26px;
+    padding: 0 30px;
+    color: #707070;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      border-color: #dedee0;
+    }
+  }
+  &__option {
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 26px;
+    padding: 7px 12px;
+    color: $textDark;
+    &:active {
+      background-color: #c2bebe;
+    }
+  }
+  &__control--is-focused {
+    box-shadow: unset;
+    border-color: none;
+    outline: none;
+  }
+  &__option--is-focused {
+    background-color: #f2f2f2;
+  }
+  &__option--is-selected {
+    background-color: #dfdbdb;
+  }
 
-	&__value-container {
-		height: 100%;
-	}
+  &__value-container {
+    height: 100%;
+  }
 
-	&__indicator-separator {
-		display: none;
-	}
+  &__indicator-separator {
+    display: none;
+  }
 }
 
 .cart-form {
-	.select {
-		margin-bottom: 20px;
+  .select {
+    margin-bottom: 20px;
 
-		&__control {
-			background-color: #fff;
-			padding: 0 10px;
-		}
-		&__placeholder {
-			position: absolute;
-			cursor: text;
+    &__control {
+      background-color: #fff;
+      padding: 0 10px;
+    }
+    &__placeholder {
+      position: absolute;
+      cursor: text;
 
-			font-size: 12px;
-			background: #fff;
-			padding: 0 10px;
-			color: $textGrey;
-			transition: all 0.2s ease;
-		}
-		&__option {
-			font-size: 13px;
-		}
-		&__single-value {
-			font-size: 13px;
-		}
-	}
+      font-size: 12px;
+      background: #fff;
+      padding: 0 10px;
+      color: $textGrey;
+      transition: all 0.2s ease;
+    }
+    &__option {
+      font-size: 13px;
+    }
+    &__single-value {
+      font-size: 13px;
+    }
+  }
 }
 
 //end select
+
+@media (max-width: 520px) {
+  .header {
+    padding: 20px;
+  }
+  .header__inner {
+    flex-direction: column;
+  }
+  .header-left {
+    flex-direction: column;
+  }
+  .header-icons {
+    padding: 10px 0;
+  }
+  .header-buttons {
+    margin-left: 0;
+  }
+}

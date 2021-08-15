@@ -1,12 +1,9 @@
 .favorite {
-	display: flex;
-	gap: 10px;
-	width: 100%;
-	max-width: 860px;
-	margin: 0 auto;
-	flex-wrap: wrap;
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 .favoriteEmpty {
-	text-align: center;
-	width: 100%;
+  text-align: center;
+  width: 100%;
 }

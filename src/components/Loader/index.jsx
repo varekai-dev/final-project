@@ -1,5 +1,6 @@
 import React from "react";
 import reactDom from "react-dom";
+
 import Popup from "../Popup";
 
 import s from "./Loader.module.scss";

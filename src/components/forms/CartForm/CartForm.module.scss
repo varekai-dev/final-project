@@ -1,0 +1,41 @@
+@import "../../../styles/variables";
+
+.cartForm {
+  border-left: 1px solid #dedee0;
+  max-width: 266px;
+  width: 100%;
+  form {
+    margin-left: 46px;
+  }
+}
+.info {
+  margin-top: 13px;
+  margin-bottom: 47px;
+  .infoItem:first-child {
+    margin-bottom: 8px;
+  }
+}
+.submit {
+  margin-bottom: 18px;
+}
+
+.infoItem {
+  font-size: 18px;
+  line-height: 26px;
+  span:first-child {
+    color: $textGrey;
+  }
+  span:last-child {
+    margin-left: 88px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cartForm {
+    max-width: 560px;
+    border-left: none;
+    form {
+      margin-left: 0;
+    }
+  }
+}

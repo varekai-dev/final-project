@@ -1,6 +1,6 @@
 import React from "react";
 
-const CloseIcon = ({ width = 24, height = 24, fill = "#727272" }) => {
+const List2Icon = ({ width = 24, height = 24, fill = "#727272" }) => {
   return (
     <svg
       width={width}
@@ -14,4 +14,4 @@ const CloseIcon = ({ width = 24, height = 24, fill = "#727272" }) => {
   );
 };
 
-export default CloseIcon;
+export default List2Icon;

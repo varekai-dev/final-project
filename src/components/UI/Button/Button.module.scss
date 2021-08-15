@@ -1,0 +1,49 @@
+@import "../../../styles/variables";
+.button {
+  height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+.buttonTransparent {
+  color: $orange;
+  border: 1px solid $orange;
+}
+
+.buttonOrange {
+  background: #fd7114;
+  color: white;
+  font-size: 16px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: 0.4px;
+
+  &:active {
+    background: #fd7114;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background: lighten($color: #fd7114, $amount: 20%);
+  }
+}
+
+.buttonBlue {
+  background: $blue;
+  color: #fff;
+
+  &:active {
+    background: $blue;
+  }
+}

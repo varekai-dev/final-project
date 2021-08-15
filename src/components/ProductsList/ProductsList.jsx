@@ -1,5 +1,7 @@
 import React from "react";
+
 import ProductItem from "../ProductItem/ProductItem";
+
 import s from "./ProductsList.module.scss";
 
 const ProductsList = ({ products }) => {

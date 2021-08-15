@@ -1,0 +1,100 @@
+@import "../../../styles/variables";
+
+.dropdownWrapper {
+  margin-bottom: 20px;
+  span {
+    margin-top: 10px;
+    font-family: "Roboto", sans-serif;
+    color: $error;
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+.dropdown {
+  background-color: white;
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  &.error {
+    border-color: $error;
+  }
+}
+
+.dropdownHeader {
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  input {
+    border: none;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+.label {
+  transition: all 0.2s ease;
+  padding: 0 10px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  font-size: 16px;
+  line-height: 19px;
+  transform: translateY(-50%);
+  color: $textGrey;
+  &.error {
+    color: $error;
+  }
+}
+.labelActive {
+  font-size: 12px;
+  line-height: 12px;
+  top: 0;
+}
+
+.dropdownBody {
+  padding: 5px;
+  border-top: 1px solid #e5e8ec;
+  display: none;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.dropdownBody.open {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  background-color: white;
+  border: solid 1px #ccc;
+}
+
+.dropdownItem {
+  padding: 5px;
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: 0.4px;
+  &:hover {
+    background: $textLight;
+  }
+}
+
+.dropdownItem:hover {
+  cursor: pointer;
+}
+
+.icon {
+  position: absolute;
+  right: 15px;
+  color: #91a5be;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  &.error {
+    svg {
+      fill: $error;
+    }
+  }
+}
