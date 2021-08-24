@@ -7,9 +7,10 @@ import s from "./ProductsList.module.scss";
 const ProductsList = ({ products }) => {
   return (
     <div className={s.products}>
-      {products.map((product) => (
-        <ProductItem key={product.id} {...product} />
-      ))}
+      {products &&
+        products.map((product) => (
+          <ProductItem key={product.id} {...product} />
+        ))}
     </div>
   );
 };

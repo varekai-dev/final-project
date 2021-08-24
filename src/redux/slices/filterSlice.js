@@ -178,7 +178,7 @@ const filterSlice = createSlice({
     resetFilters(state) {
       state.activeCategory = null;
       state.activeSortBy = null;
-      state.searchValue = "null";
+      state.searchValue = "";
     },
   },
 

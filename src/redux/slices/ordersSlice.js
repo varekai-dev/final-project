@@ -115,9 +115,11 @@ const orderSlice = createSlice({
       state.orders = items;
     },
     removeProductFromOrder(state, action) {
-      state.orders = state.orders.filter(
+      const newOrders = state.orders.filter(
         (order) => order.id !== action.payload.id
       );
+      state.orders = newOrders;
+      sessionStorage.setItem("orders", JSON.stringify(newOrders));
     },
     increaseQuantity(state, action) {
       const newOrders = state.orders.map((order) =>
@@ -126,6 +128,7 @@ const orderSlice = createSlice({
           : order
       );
       state.orders = newOrders;
+      sessionStorage.setItem("orders", JSON.stringify(newOrders));
     },
     decreaseQuantity(state, action) {
       const newOrders = state.orders.map((order) =>
@@ -137,6 +140,7 @@ const orderSlice = createSlice({
           : order
       );
       state.orders = newOrders;
+      sessionStorage.setItem("orders", JSON.stringify(newOrders));
     },
 
     addCountries(state, action) {
