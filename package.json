@@ -2,6 +2,7 @@
   "name": "final-project",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://apiko-2021-spring-course-api.herokuapp.com",
   "dependencies": {
     "@hookform/resolvers": "^2.7.1",
     "@reduxjs/toolkit": "^1.6.1",
